@@ -32,10 +32,11 @@ class restaurant_super:
 		soup = BeautifulSoup(menu_content, 'html.parser')
 		return self.build_menu(soup)
 
-	def menu_add_lunch_to_day(self, date, food, price = None):
+	def menu_add_lunch_to_day(self, date, food, price = None, everyday = False):
 		food_dict = {
 						'food': food,
-						'price': price
+						'price': price,
+						'everyday': everyday
 					}
 
 		if date not in self.menu['lunches'].keys():

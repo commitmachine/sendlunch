@@ -25,7 +25,7 @@ def init_db():
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
     sql = """CREATE TABLE IF NOT EXISTS lunches(
-      lunchdate text, restaurant text, food text, price text, hasbeer boolean
+      lunchdate text, restaurant text, food text, price text, hasbeer boolean, everyday boolean
     )"""
     conn.execute(sql)
     conn.commit()
@@ -57,10 +57,10 @@ def add_lunches(menu):
     conn = sqlite3.connect(dbname)
     for date in menu['lunches'].keys():
         for food_list in menu['lunches'][date]:
-            conn.cursor().execute("""INSERT INTO lunches SELECT ?, ?, ?, ?, ?
+            conn.cursor().execute("""INSERT INTO lunches SELECT ?, ?, ?, ?, ?, ?
                                      WHERE NOT EXISTS(SELECT 1 FROM lunches
                                         WHERE lunchdate = ? AND restaurant = ? AND food = ?);""",
-            (date, menu['name'], food_list['food'], food_list['price'], menu['hasbeer'],
+            (date, menu['name'], food_list['food'], food_list['price'], menu['hasbeer'], food_list['everyday'],
              date, menu['name'], food_list['food'],))
     conn.commit()
     conn.close()
@@ -73,12 +73,23 @@ def site():
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
     fromdate, todate = get_week_dates()
-    cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer FROM lunches
-                   """
-                )
+    cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday FROM lunches
+                   WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant""",
+                (fromdate, fromdate,))
     rows = cur.fetchall()
     conn.close()
 
-    return Response(to_str(json.dumps(rows)), mimetype='text/json')
-
-    #return render_template('list.html', places = rows)
+    current_header = ''
+    current_name = ''
+    out = []
+    for row in rows:
+        header = None
+        name = None
+        if current_header != row[0]:
+            header = row[0]
+            current_header = row[0]
+        if current_name != row[1]:
+            name = row[1]
+            current_name = row[1]
+        out.append({'header':header, 'headername':name, 'name': row[1], 'line': row[2], 'everyday': row[5]})
+    return render_template('list.html', rows = out)
