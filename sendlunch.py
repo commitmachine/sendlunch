@@ -1,8 +1,11 @@
 #!/usr/bin/python
-
 import os, sys, time, re, json, requests, importlib
-from places.mclarens import Mclarens
+import places
 
-mc = Mclarens()
+places_list = []
 
-print mc.get_lunches()
+for i in places.__all__:
+    __import__("places." + i)
+    places_list.append(sys.modules["places."+i].restaurant().get_name())
+
+print places_list

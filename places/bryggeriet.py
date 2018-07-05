@@ -2,7 +2,7 @@ from places import restaurant_super
 
 class restaurant(restaurant_super):
 
-	name = 'McLarens'
+	name = 'Bryggeriet'
 	lunch_url = "http://www.kvartersmenyn.se/rest/9664"
 
 	def __init__(self):

@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-class restaurant:
+class restaurant_super:
 
 	lunch_url = None
 	soup = None
@@ -17,6 +17,9 @@ class restaurant:
 			'lunches': {}
 		}
 
+	def get_name(self):
+		return self.name
+
 	def download_menu(self):
 		r = requests.get(self.lunch_url)
 		return r.content
@@ -29,9 +32,9 @@ class restaurant:
 		soup = BeautifulSoup(menu_content, 'html.parser')
 		return self.build_menu(soup)
 
-	def menu_add_lunch_to_day(self, date, name, price, everyday):
+	def menu_add_lunch_to_day(self, date, food, price = None, everyday = False):
 		food_dict = {
-						'food': name,
+						'food': food,
 						'price': price,
 						'everyday': everyday
 					}
