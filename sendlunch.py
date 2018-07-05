@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import os, sys, time, re, json, requests, importlib
 import places
 import pprint
