@@ -21,14 +21,13 @@ class restaurant:
 		r = requests.get(self.lunch_url)
 		return r.content
 
-	def parse_menu_content(self, soup):
+	def build_menu(self, soup):
 		return None
 
 	def get_lunches(self):
 		menu_content = self.download_menu()
 		soup = BeautifulSoup(menu_content, 'html.parser')
-		return self.parse_menu_content(soup)
-
+		return self.build_menu(soup)
 
 	def menu_add_lunch_to_day(self, date, name, price, everyday):
 		food_dict = {

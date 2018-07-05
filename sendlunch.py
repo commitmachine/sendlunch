@@ -1,9 +1,8 @@
+#!/usr/bin/python
+
 import os, sys, time, re, json, requests, importlib
-from collections import OrderedDict, defaultdict
-from flask import Flask, request, Response, render_template
+from places.mclarens import Mclarens
 
-from restaurants import mclarens
+mc = Mclarens()
 
-mc = mclarens.Mclarens()
-
-mc.get_lunches()
+print mc.get_lunches()
