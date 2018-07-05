@@ -25,7 +25,7 @@ class restaurant(restaurant_super):
         if price == None:
             price = self.lunch_price
 
-        self.menu_add_lunch_to_day(date, name, int(price), everyday)
+        self.menu_add_lunch_to_day(date, name, int(price))
 
     def date_from_weekday(self, week_number, day):
         first_day_of_week = self.date_from_week_number(week_number)
