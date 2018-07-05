@@ -39,10 +39,10 @@ class restaurant_super:
 						'everyday': everyday
 					}
 
-		if date not in menu['lunches'].keys():
-			menu['lunches'][date] = [food_dict]
+		if date not in self.menu['lunches'].keys():
+			self.menu['lunches'][date] = [food_dict]
 		else:
-			menu['lunches'][date].append(food_dict)
+			self.menu['lunches'][date].append(food_dict)
 
-	def menu_set_has_beer(self, hasbeer):
-		menu['hasbeer'] = hasbeer
+	def menu_has_beer(self, hasbeer):
+		self.menu['hasbeer'] = hasbeer
