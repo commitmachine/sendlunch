@@ -3,10 +3,10 @@ import restaurant
 class Mclarens(restaurant.restaurant):
 
 	name = 'McLarens'
-	menu_url = "http://www.kvartersmenyn.se/rest/9664"
+	lunch_url = "http://www.kvartersmenyn.se/rest/9664"
 
 	def __init__(self):
-		restaurant.__init__(self.name, self.menu_url)
+		restaurant.__init__(self.name, self.lunch_url)
 
 def build_menu(self, soup):
 	day = soup.find_all('div', {"class": "day"})
