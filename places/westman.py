@@ -55,6 +55,6 @@ class restaurant(restaurant_super):
                 all_food = unicode(row).replace(unicode(day), '').replace('Salladsbuffé från vår salladsbar 95 kr inkl. kaffe, te, efterrätt', '').split('<br/>')
                 for food in all_food:
                     if '<' not in food:
-                        final_dish = food.replace('(G)', '').replace('(L)', '').replace('(G, L)', '').replace('(G,L)', '')
+                        final_dish = food.replace('(G)', '').replace('(L)', '').replace('(G, L)', '').replace('(G,L)', '').replace('&amp;', ' och ')
                         self.menu_add_lunch_to_day(date, final_dish, 95)
         return self.menu
