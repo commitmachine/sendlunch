@@ -67,18 +67,32 @@ def add_lunches(menu):
 
 init()
 
-app = Flask(__name__)
-@app.route('/')
-def site():
+
+def generate_output(current_date = None):
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
     fromdate, todate = get_week_dates()
     cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday, lunchtimes FROM lunches
                    WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant""",
-                (fromdate, fromdate,))
+                (current_date or fromdate, current_date or fromdate,))
     rows = cur.fetchall()
-    conn.close()
 
+    cur.execute("""SELECT lunchdate FROM lunches
+                   WHERE lunchdate > ? LIMIT 1""",
+                (current_date or fromdate,))
+    nextdate = cur.fetchone()
+
+    cur.execute("""SELECT lunchdate FROM lunches
+                   WHERE lunchdate < ? limit 1""",
+                (current_date or fromdate,))
+    prevdate = cur.fetchone()
+
+    if nextdate:
+        nextdate = nextdate[0]
+    if prevdate:
+        prevdate = prevdate[0]
+
+    conn.close()
     current_header = ''
     current_name = ''
     current_lunchtimes = ''
@@ -97,4 +111,16 @@ def site():
             lunchtimes = row[6]
             current_lunchtimes = row[6]
         out.append({'header':header, 'headername':name, 'lunchtimes': lunchtimes, 'name': row[1], 'line': row[2], 'price': row[3], 'everyday': row[5]})
-    return render_template('list.html', rows = out)
+
+    return nextdate, prevdate, out
+
+app = Flask(__name__)
+@app.route('/')
+def site():
+      nextdate, prevdate, out = generate_output()
+      return render_template('list.html', rows = out, nextdate = nextdate, prevdate = prevdate)
+
+@app.route('/<date>')
+def site_date(date):
+      nextdate, prevdate, out = generate_output(date)
+      return render_template('list.html', rows = out, nextdate = nextdate, prevdate = prevdate)
