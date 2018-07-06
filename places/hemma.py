@@ -100,4 +100,5 @@ class restaurant(restaurant_super):
 
                     #print(date, description, dish_price, everyday)
 
+        return self.menu
 
