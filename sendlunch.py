@@ -77,12 +77,12 @@ def generate_output(current_date = None):
                 (current_date or fromdate, current_date or fromdate,))
     rows = cur.fetchall()
 
-    cur.execute("""SELECT lunchdate FROM lunches
+    cur.execute("""SELECT min(lunchdate) FROM lunches
                    WHERE lunchdate > ? LIMIT 1""",
                 (current_date or fromdate,))
     nextdate = cur.fetchone()
 
-    cur.execute("""SELECT lunchdate FROM lunches
+    cur.execute("""SELECT max(lunchdate) FROM lunches
                    WHERE lunchdate < ? limit 1""",
                 (current_date or fromdate,))
     prevdate = cur.fetchone()
