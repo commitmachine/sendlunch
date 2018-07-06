@@ -72,7 +72,7 @@ app = Flask(__name__)
 def site():
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
-    fromd ate, todate = get_week_dates()
+    fromdate, todate = get_week_dates()
     cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday, lunchtimes FROM lunches
                    WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant""",
                 (fromdate, fromdate,))
