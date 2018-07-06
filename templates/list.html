@@ -232,10 +232,17 @@ span.show-menu {
     float: right;
     font-size: 12px;
     color: #333;
-    cursor: pointer;
+    padding-top:3px;
 }
+.dateheader { text-align: center; }
+.clickable { cursor: pointer; }
 span.show-menu:hover {
     text-decoration: underline;
+}
+.beer-icon {
+    width: 22px;
+    height: 22px;
+    margin-top: -2px;
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -281,7 +288,14 @@ span.show-menu:hover {
         {% if row['headername'] %}
         <div class="nameheader">
           <div class="nameheader-text"><span>{{ row['headername'] }}</span>
-          <span class="show-menu" onclick="toggle_view(this, '{{ row['name'] }}')">show menu</span></div>
+              <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">show menu</span>
+              {% if row['lunchtimes'] %}
+              <span class="show-menu">Öppet {{ row['lunchtimes'] }}</span>
+              {% endif %}
+              {% if row['hasbeer'] %}
+                <span class="show-menu" style="margin-right: 10px;"><img src="static/beer.png" class="beer-icon"></span>
+              {% endif %}
+          </div>
           <div style="clear:both"></div>
           <div class="nameheader-border"></div>
         </div>

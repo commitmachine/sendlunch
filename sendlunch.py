@@ -96,5 +96,5 @@ def site():
         if current_lunchtimes != row[6]:
             lunchtimes = row[6]
             current_lunchtimes = row[6]
-        out.append({'header':header, 'headername':name, 'lunchtimes': lunchtimes, 'name': row[1], 'line': row[2], 'price': row[3], 'everyday': row[5]})
+        out.append({'header':header, 'headername':name, 'lunchtimes': lunchtimes, 'name': row[1], 'line': row[2], 'price': row[3], 'hasbeer': row[4], 'everyday': row[5]})
     return render_template('list.html', rows = out)

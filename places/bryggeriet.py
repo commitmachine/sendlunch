@@ -68,6 +68,7 @@ class restaurant(restaurant_super):
                     return [week, year]
 
     def build_menu(self, soup):
+        self.menu_set_lunchtimes('12-15')
         w = self.parse_week_number(soup)
         week_number = w[0]
         year = w[1]
