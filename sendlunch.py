@@ -60,7 +60,7 @@ def add_lunches(menu):
             conn.cursor().execute("""INSERT INTO lunches SELECT ?, ?, ?, ?, ?, ?, ?
                                      WHERE NOT EXISTS(SELECT 1 FROM lunches
                                         WHERE lunchdate = ? AND restaurant = ? AND food = ?);""",
-            (date, menu['name'], food_list['food'], food_list['price'], menu['hasbeer'], food_list['everyday'], food_list['lunchtimes'],
+            (date, menu['name'], food_list['food'], food_list['price'], menu['hasbeer'], food_list['everyday'], menu['lunchtimes'],
              date, menu['name'], food_list['food'],))
     conn.commit()
     conn.close()
@@ -72,8 +72,8 @@ app = Flask(__name__)
 def site():
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
-    fromdate, todate = get_week_dates()
-    cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday, lunchtime FROM lunches
+    fromd ate, todate = get_week_dates()
+    cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday, lunchtimes FROM lunches
                    WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant""",
                 (fromdate, fromdate,))
     rows = cur.fetchall()
@@ -81,20 +81,20 @@ def site():
 
     current_header = ''
     current_name = ''
-    current_lunchtime = ''
+    current_lunchtimes = ''
     out = []
     for row in rows:
         header = None
         name = None
-        lunchtime = None
+        lunchtimes = None
         if current_header != row[0]:
             header = row[0]
             current_header = row[0]
         if current_name != row[1]:
             name = row[1]
             current_name = row[1]
-        if current_lunchtime != row[6]:
-            lunchtime = row[6]
-            current_lunchtime = row[6]
-        out.append({'header':header, 'headername':name, 'lunchtime': lunchtime, 'name': row[1], 'line': row[2], 'price': row[3], 'everyday': row[5]})
+        if current_lunchtimes != row[6]:
+            lunchtimes = row[6]
+            current_lunchtimes = row[6]
+        out.append({'header':header, 'headername':name, 'lunchtimes': lunchtimes, 'name': row[1], 'line': row[2], 'price': row[3], 'everyday': row[5]})
     return render_template('list.html', rows = out)
