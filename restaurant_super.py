@@ -14,6 +14,7 @@ class restaurant_super:
 		self.menu = {
 			'name': self.name,
 			'hasbeer': None,
+			'lunchtime': None,
 			'lunches': {}
 		}
 
@@ -46,3 +47,6 @@ class restaurant_super:
 
 	def menu_has_beer(self, hasbeer):
 		self.menu['hasbeer'] = hasbeer
+
+	def menu_set_lunchtime(self, lunchtime):
+		self.menu['lunchtime'] = lunchtime
