@@ -102,13 +102,34 @@ a {
   border-bottom: 1px solid #cccccc;
 }
 .dateheader {
+    margin: 0 auto;
+    width: 350px;
   padding: 4px;
   margin-bottom: 0px;
 }
+.prevdate {
+    float: left;
+    padding-top: 5px;
+    margin-right: 20px;
+    color: #b9b9b9;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+.nextdate {
+    float: left;
+    padding-top: 5px;
+    margin-left: 20px;
+    color: #b9b9b9;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
 .dateheader-text{
+    float: left;
   color: #b9b9b9;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 24px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -282,7 +303,14 @@ span.show-menu:hover {
       {% for row in rows %}
         {% if row['header'] %}
         <div class="dateheader">
+            {% if prevdate %}
+          <div class="prevdate"><a href="/{{ prevdate }}">{{ prevdate }}</a></div>
+          {% endif %}
           <div class="dateheader-text">{{ row['header'] }}</div>
+          {% if nextdate %}
+          <div class="nextdate"><a href="/{{ nextdate }}">{{ nextdate }}</a></div>
+          {% endif %}
+          <div style="clear:both"></div>
           <div class="dateheader-border"></div>
         </div>
         {% endif %}
