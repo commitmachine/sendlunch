@@ -73,6 +73,6 @@ class restaurant(restaurant_super):
                 self.menu_add_lunch_to_day(key['date'].strftime('%Y-%m-%d'), key['name'], int(key['price']))
             else:
                 for date in all_dates:
-                    self.menu_add_lunch_to_day(date.strftime('%Y-%m-%d'), key['name'], int(key['price']))
+                    self.menu_add_lunch_to_day(date.strftime('%Y-%m-%d'), key['name'], int(key['price']), True)
 
         return self.menu

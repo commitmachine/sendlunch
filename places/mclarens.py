@@ -1,4 +1,5 @@
 from places import restaurant_super
+from random import choice
 import re
 from datetime import datetime, timedelta
 class restaurant(restaurant_super):
@@ -55,5 +56,5 @@ class restaurant(restaurant_super):
 			for lunch in lunches:
 				food = lunch[0]
 				price = lunch[1]
-				self.menu_add_lunch_to_day(date, food, price)
+				self.menu_add_lunch_to_day(date, food, price, not choice(['yes', 'maybe', 'no']) == 'no')
 		return self.menu

@@ -103,7 +103,7 @@ a {
 }
 .dateheader {
     margin: 0 auto;
-    width: 350px;
+    width: 370px;
   padding: 4px;
   margin-bottom: 0px;
 }
@@ -111,23 +111,24 @@ a {
     float: left;
     padding-top: 5px;
     margin-right: 20px;
-    color: #b9b9b9;
+    color: #b9b9b9 !important;
     font-weight: bold;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
 }
+.nextdate a, .prevdate a { color: #b9b9b9 !important; }
 .nextdate {
     float: left;
     padding-top: 5px;
     margin-left: 20px;
-    color: #b9b9b9;
+    color: #b9b9b9 !important;
     font-weight: bold;
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
 }
 .dateheader-text{
     float: left;
-  color: #b9b9b9;
+  color: #a2a2a2;
   font-weight: bold;
   font-size: 24px;
   font-family: 'Montserrat', sans-serif;
@@ -248,6 +249,7 @@ a {
   float:left;
 }
 .div-right{
+    font-family: 'Roboto', sans-serif;
   float:right;
 }
 span.show-menu {
@@ -279,10 +281,10 @@ span.show-menu:hover {
         });
     }
     function toggle_view(dis, me) {
-        if ($(dis).text() == 'show always on menu') {
-            $(dis).text('hide always on menu');
+        if ($(dis).text() == 'Show lunch à la carte') {
+            $(dis).text('Hide lunch à la carte');
         } else {
-            $(dis).text('show always on menu');
+            $(dis).text('Show lunch à la carte');
         }
         $('.' + me).toggle();
     }
@@ -317,7 +319,7 @@ span.show-menu:hover {
         {% if row['headername'] %}
         <div class="nameheader">
           <div class="nameheader-text"><span>{{ row['headername'] }}</span>
-              <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">show always on menu</span>
+              <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">Show lunch à la carte</span>
               {% if row['lunchtimes'] %}
               <span class="show-menu">Öppet {{ row['lunchtimes'] }}</span>
               {% endif %}
@@ -335,7 +337,7 @@ span.show-menu:hover {
       <div class="notice">
       {% endif %}
         <div class="div-left">{{ row['line'] }}</div>
-        <div class="div-right">{{ row['price'] }}</div>
+        <div class="div-right">{{ row['price'] }} kr</div>
         <div class="spacer" style="clear: both;"></div>
       </div>
       {% endfor %}

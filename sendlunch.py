@@ -73,7 +73,7 @@ def generate_output(current_date = None):
     cur = conn.cursor()
     fromdate, todate = get_week_dates()
     cur.execute("""SELECT lunchdate, restaurant, food, price, hasbeer, everyday, lunchtimes FROM lunches
-                   WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant""",
+                   WHERE lunchdate >= ? AND lunchdate <= ? ORDER BY restaurant, everyday""",
                 (current_date or fromdate, current_date or fromdate,))
     rows = cur.fetchall()
 
