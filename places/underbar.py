@@ -22,19 +22,23 @@ class restaurant(restaurant_super):
     def build_menu(self, soup):
         self.menu_set_lunchtimes('11-14:30')
         panels = soup.find_all('section', { "class": "page__content" })
-        dish = None
-        dishes = {}
-        all_dates = {}
+        lunchrows = []
+
         for panel in panels:
             divs = panel.find_all('div')
             for div in divs:
+                #find the first half of the menu
                 ps = div.find_all('p')
-                for p in ps:
-                    lunchrows = unicode(p).replace("<p>", "").replace("</p>", "").split("<br/>")
+                #for p in ps:
+                #    lunchrows += (unicode(p).replace("<p>", "").replace("</p>", "").split("<br/>"))
+                #get the rest
+                lunchrows += (unicode(div).replace("<p>", "").replace('<div class="">', "").replace("</p>", "").split("<br/>"))
 
         for lunchrow in lunchrows:
             regex = '(.+) (\d*):-'
             x = re.search(regex, lunchrow, re.IGNORECASE)
-            self.menu_add_lunch_to_day(datetime.datetime.now().strftime('%Y-%m-%d'), x.group(1), x.group(2))
+            if x and x.group(1):
+                self.menu_add_lunch_to_day(datetime.datetime.now().strftime('%Y-%m-%d'), x.group(1), x.group(2))
+
 
         return self.menu
