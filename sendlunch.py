@@ -65,15 +65,7 @@ def add_lunches(menu):
     conn.commit()
     conn.close()
 
-if __name__ == '__main__':
-    for lunch_place in lunch_places:
-        name = 'Bryggeriet'
-        if lunch_place.name == name:
-            print('Parsing ' + name + '...')
-            lunches = lunch_place.get_lunches()
-            print(lunches)
-else:
-    init()
+init()
 
 app = Flask(__name__)
 @app.route('/')
