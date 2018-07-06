@@ -27,11 +27,6 @@ class restaurant(restaurant_super):
         for panel in panels:
             divs = panel.find_all('div')
             for div in divs:
-                #find the first half of the menu
-                ps = div.find_all('p')
-                #for p in ps:
-                #    lunchrows += (unicode(p).replace("<p>", "").replace("</p>", "").split("<br/>"))
-                #get the rest
                 lunchrows += (unicode(div).replace("<p>", "").replace('<div class="">', "").replace("</p>", "").split("<br/>"))
 
         for lunchrow in lunchrows:
