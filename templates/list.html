@@ -175,6 +175,7 @@ a {
 }
 
 .everyday {
+    display: none;
     color: #a7a5a5;
     font-size: 15px;
     padding: 15px;
@@ -257,10 +258,10 @@ span.show-menu:hover {
         });
     }
     function toggle_view(dis, me) {
-        if ($(dis).text() == 'show menu') {
-            $(dis).text('hide menu');
+        if ($(dis).text() == 'show always on menu') {
+            $(dis).text('hide always on menu');
         } else {
-            $(dis).text('show menu');
+            $(dis).text('show always on menu');
         }
         $('.' + me).toggle();
     }
@@ -288,7 +289,7 @@ span.show-menu:hover {
         {% if row['headername'] %}
         <div class="nameheader">
           <div class="nameheader-text"><span>{{ row['headername'] }}</span>
-              <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">show menu</span>
+              <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">show always on menu</span>
               {% if row['lunchtimes'] %}
               <span class="show-menu">Öppet {{ row['lunchtimes'] }}</span>
               {% endif %}
