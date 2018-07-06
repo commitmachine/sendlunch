@@ -46,6 +46,7 @@ class restaurant(restaurant_super):
 
         regex_week = '^Vecka\s(\d+)'
         regex_price = '^\s*Pris\s(\d+)'
+        regex_time = '(\d+.\d+-\d+.\d+)'
         regex_days = '^(M\xc5NDAG|TISDAG|ONSDAG|TORSDAG|FREDAG|L\xd6RDAG|S\xd6NDAG)'
         regex_everyday = '^(Veckan|Alltid)'
         regex_dish_price = '(\d+):-'
@@ -54,17 +55,22 @@ class restaurant(restaurant_super):
         header_item = menu_item[0].find_all('div', {"id": "comp-ivmua05y"})
         lunch_item = menu_item[0].find_all('div', {"id": "comp-ivmud3bc"})
 
-        # Get price and week
+        # Get price, week and time
         for i in header_item[0].children:
             i_str = i.string.replace(nonBreakSpace, ' ')
 
-            x0 = re.search(regex_week, i_str)
-            if x0:
-                week = x0.group(1)
+            x1 = re.search(regex_week, i_str)
+            if x1:
+                week = x1.group(1)
 
             x1 = re.search(regex_price, i_str)
             if x1:
                 price = x1.group(1)
+
+            x1 = re.search(regex_time, i_str)
+            if x1:
+                time = x1.group(1)
+                self.menu_set_lunchtimes(time)
 
         # Get lunches
         for i in lunch_item[0].children:
