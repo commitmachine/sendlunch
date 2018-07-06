@@ -3,7 +3,7 @@
 from places import restaurant_super
 import re, datetime
 class restaurant(restaurant_super):
-    name = 'Pompeij'
+    name = 'Pompei'
     lunch_url = "http://www.restaurangpompei.se/index.php/dagens-lunch"
 
     def __init__(self):
@@ -38,6 +38,7 @@ class restaurant(restaurant_super):
 
     def build_menu(self, soup):
         self.menu_has_beer(True)
+        self.menu_set_lunchtimes('11-15')
 
         panels = soup.find_all('div', { "class": "sppb-panel-modern" })
         dish = None

@@ -8,7 +8,7 @@ class restaurant(restaurant_super):
 	def __init__(self):
 		restaurant_super.__init__(self, self.name, self.lunch_url)
 	def build_menu(self, soup):
-
+		self.menu_set_lunchtimes('10:30-14')
 		self.menu_has_beer(True)
 		menu_item = soup.find_all('tr', {"class": "lunch-menu-item"})
 

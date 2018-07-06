@@ -318,7 +318,7 @@ span.show-menu {
           <div class="nameheader-text"><span>{{ row['headername'] }}</span>
               <span class="show-menu clickable" style="margin-left: 20px;" onclick="toggle_view(this, '{{ row['name'] }}')">Show lunch à la carte</span>
               {% if row['lunchtimes'] %}
-              <span class="show-menu">Öppet {{ row['lunchtimes'] }}</span>
+              <span class="show-menu">Lunch {{ row['lunchtimes'] }}</span>
               {% endif %}
               {% if row['hasbeer'] %}
                 <span class="show-menu" style="margin-right: 10px;"><img src="static/beer.png" class="beer-icon"></span>
