@@ -228,6 +228,15 @@ a {
 .div-right{
   float:right;
 }
+span.show-menu {
+    float: right;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+}
+span.show-menu:hover {
+    text-decoration: underline;
+}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -240,8 +249,13 @@ a {
             location.reload();
         });
     }
-    function toggle_view(me){
-        $('.' + me).toggle()
+    function toggle_view(dis, me) {
+        if ($(dis).text() == 'show menu') {
+            $(dis).text('hide menu');
+        } else {
+            $(dis).text('show menu');
+        }
+        $('.' + me).toggle();
     }
 
 </script>
@@ -267,7 +281,8 @@ a {
         {% if row['headername'] %}
         <div class="nameheader">
           <div class="nameheader-text"><span>{{ row['headername'] }}</span>
-          <span class="button"><button onclick="toggle_view('{{ row['name'] }}')">show menu</button></span></div>
+          <span class="show-menu" onclick="toggle_view(this, '{{ row['name'] }}')">show menu</span></div>
+          <div style="clear:both"></div>
           <div class="nameheader-border"></div>
         </div>
         {% endif %}
