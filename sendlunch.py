@@ -91,5 +91,5 @@ def site():
         if current_name != row[1]:
             name = row[1]
             current_name = row[1]
-        out.append({'header':header, 'headername':name, 'name': row[1], 'line': row[2], 'everyday': row[5]})
+        out.append({'header':header, 'headername':name, 'name': row[1], 'line': row[2], 'price': row[3], 'everyday': row[5]})
     return render_template('list.html', rows = out)
